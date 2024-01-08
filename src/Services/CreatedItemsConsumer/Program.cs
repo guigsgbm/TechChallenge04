@@ -1,4 +1,5 @@
 using Infrastructure.DB;
+using Infrastructure.DB.Repository;
 using Infrastructure.Messaging;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,11 @@ builder.Services.Configure<ItemMessagingConfig>(builder.Configuration.GetSection
 
 builder.Services.AddHostedService<Worker>();
 builder.Services.AddSingleton<ItemMessaging>();
+builder.Services.AddSingleton<ItemRepository>();
+
+var connection = builder.Configuration.GetConnectionString("AzureDB");
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connection), ServiceLifetime.Singleton);
 
 var host = builder.Build();
 host.Run();

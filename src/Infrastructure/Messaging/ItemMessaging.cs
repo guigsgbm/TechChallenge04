@@ -4,10 +4,6 @@ using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using Domain;
 using Infrastructure.DB.Repository;
-using Infrastructure.DB;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Messaging;
@@ -18,18 +14,19 @@ public class ItemMessagingConfig
     public string? QueueName { get; set; }
 }
 
-
 public class ItemMessaging
 {
+    private readonly ItemRepository _itemRepository;
     private readonly IQueueClient _queueClient;
     private readonly ItemMessagingConfig _itemMessagingConfig;
     private readonly ILogger<ItemMessaging> _logger;
 
-    public ItemMessaging(IOptions<ItemMessagingConfig> itemMessagingConfig, ILogger<ItemMessaging> logger)
+    public ItemMessaging(IOptions<ItemMessagingConfig> itemMessagingConfig, ILogger<ItemMessaging> logger, ItemRepository itemRepository)
     {
         _itemMessagingConfig = itemMessagingConfig.Value;
         _queueClient = new QueueClient(_itemMessagingConfig.ConnectionString, _itemMessagingConfig.QueueName);
         _logger = logger;
+        _itemRepository = itemRepository;
     }
 
     public async Task SendMessageAsync(SimplifiedItem item)
@@ -45,7 +42,7 @@ public class ItemMessaging
         var messageHandlerOptions = new MessageHandlerOptions(ExceptionReceivedHandler)
         {
             MaxConcurrentCalls = 1,
-            AutoComplete = false // Set to false to manually complete the message
+            AutoComplete = false
         };
 
         _queueClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
@@ -53,7 +50,6 @@ public class ItemMessaging
 
     public void StopMessageProcessing()
     {
-        // Chame este método para parar o processamento de mensagens
         _queueClient.CloseAsync().Wait();
     }
 
@@ -62,14 +58,17 @@ public class ItemMessaging
         // Process the message here
         _logger.LogInformation($"Received message: {Encoding.UTF8.GetString(message.Body)}");
 
-        // Complete the message to remove it from the queue
+        var bodyJson = Encoding.UTF8.GetString(message.Body);
+        var item = JsonConvert.DeserializeObject<Item>(bodyJson);
+
+        await _itemRepository.Add(item);
+        await _itemRepository.Save();
+
         await _queueClient.CompleteAsync(message.SystemProperties.LockToken);
     }
 
-
     private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
     {
-        // Handle exceptions received while processing messages
         _logger.LogError($"Message handler encountered an exception: {exceptionReceivedEventArgs.Exception}");
 
         return Task.CompletedTask;

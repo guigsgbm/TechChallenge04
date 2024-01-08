@@ -15,7 +15,7 @@ public class Worker : BackgroundService
     {
         _itemMessaging.StartMessageProcessing();
         return base.StartAsync(cancellationToken);
-    } 
+    }
 
     public override Task StopAsync(CancellationToken cancellationToken)
     {
