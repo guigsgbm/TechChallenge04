@@ -23,14 +23,13 @@ public class Item
     {
         
     }
-
 }
 
-public class SimplifiedItem
+public record SimplifiedItem
 {
-    public string? Name { get; set; }
-    public string? Description { get; set; }
-    public Categories? Type { get; set; }
+    public string? Name { get; init; }
+    public string? Description { get; init; }
+    public Categories? Type { get; init; }
 
     public enum Categories
     {

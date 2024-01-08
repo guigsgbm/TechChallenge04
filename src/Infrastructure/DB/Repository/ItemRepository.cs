@@ -12,8 +12,6 @@ namespace Infrastructure.DB.Repository;
 public class ItemRepository : IRepository<Item>
 {
     private readonly AppDbContext _context;
-
-
     public ItemRepository(AppDbContext context)
     {
         _context = context;

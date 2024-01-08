@@ -55,7 +55,6 @@ public class ItemMessaging
 
     private async Task ProcessMessagesAsync(Message message, CancellationToken token)
     {
-        // Process the message here
         _logger.LogInformation($"Received message: {Encoding.UTF8.GetString(message.Body)}");
 
         var bodyJson = Encoding.UTF8.GetString(message.Body);
@@ -73,7 +72,6 @@ public class ItemMessaging
 
         return Task.CompletedTask;
     }
-
 
 }
 
