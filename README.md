@@ -17,6 +17,7 @@ Antes de começar, certifique-se de ter o seguinte:
 - ACR (Azure Container Registry).
 - ACI (Azure Container Instance).
 - Azure App Service.
+- Service Bus + Queue
 
 ### 2. Clone o Repositório
 
