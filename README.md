@@ -15,6 +15,7 @@ Antes de começar, certifique-se de ter o seguinte:
 ### 1. Deploy dos recursos no Azure.
 - Sql Server + Database (Aplicar Migrations, ex: dotnet ef database update).
 - ACR (Azure Container Registry).
+- ACI (Azure Container Instance).
 - Azure App Service.
 
 ### 2. Clone o Repositório
@@ -31,11 +32,11 @@ Antes de começar, certifique-se de ter o seguinte:
 	```
 	cd .\TechChallenge04\
 	```
-- Rode os comandos Migrations
+- Rode os comandos de Migrations
 	```
-	dotnet ef migrations add "NomeMigracao" -c .\src\Infrastructure\DB\AppDbContext.cs -p .\src\Infrastructure\Infrastructure.csproj -s .\src\Services\ItemApi\ItemApi.csproj -o .\DB\Migrations\
+	dotnet ef migrations add "Initial" -p.\src\Infrastructure\Infrastructure.csproj -c AppDbContext -s.\src\Services\ItemApi\ItemApi.csproj -o.\DB\Migrations\ --verbose
   
-	dotnet ef database update -c .\src\Infrastructure\DB\AppDbContext.cs -p .\src\Infrastructure\Infrastructure.csproj -s .\src\Services\ItemApi\ItemApi.csproj
+	dotnet ef database update -p .\src\Infrastructure\Infrastructure.csproj -c AppDbContext -s .\src\Services\ItemApi\ItemApi.csproj
 	```
 
 - Build e push da imagem
