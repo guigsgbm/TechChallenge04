@@ -55,9 +55,9 @@ Antes de começar, certifique-se de ter o seguinte:
 	```
 	*As imagens foram baseadas para realizar o build em Linux
 
-### 4. Criar e configurar App Services (WebApp)
+### 4. Criar e configurar App Services (WebApp) e Azure Containe Instance
 
-- Cada imagem tera seu respectivo App Service.
+- Cada imagem tera seu respectivo recurso de infraestrutura.
 No momento da criacao do App Service, na opcao "Publish", iremos selecionar "Docker Container".
 Depois, iremos navegar ate a aba "Docker" e apontaremos para as imagens que foram enviadas ao nosso ACR anteriormente. EX:
 
@@ -66,6 +66,8 @@ Depois, iremos navegar ate a aba "Docker" e apontaremos para as imagens que fora
 	Registry = Seu ACR
 	Image = Nome da Imagem (ex: itemapi)
 	Tag = latest
+
+O processo eh semelhante para o ACI, basta criar o recurso apontando para a imagem, ou fazer o deploy da imagem no recurso posteriormente.
 
 ### Conclusão
 
