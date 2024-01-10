@@ -55,7 +55,7 @@ Antes de começar, certifique-se de ter o seguinte:
 	```
 	*As imagens foram baseadas para realizar o build em Linux
 
-### 4. Criar e configurar App Services (WebApp) e Azure Containe Instance
+### 4. Criar e configurar App Services (WebApp) e Azure Container Instance
 
 - Cada imagem tera seu respectivo recurso de infraestrutura.
 No momento da criacao do App Service, na opcao "Publish", iremos selecionar "Docker Container".
