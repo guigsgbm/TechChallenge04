@@ -1,16 +1,15 @@
-# DocumentaÁ„o do Projeto TechChallenge04
+# Documenta√ß√£o do Projeto TechChallenge04
 
-## Vis„o Geral
-Este projeto È uma aplicaÁ„o .NET 8 que consiste em uma API (que funciona como um Producer tambem), e um Worker (Consumer). O guia a seguir fornece instruÁıes detalhadas para configurar e implantar o projeto em um ambiente Azure.
+## Vis√£o Geral
+Este projeto √© uma aplica√ß√£o .NET 8 que consiste em uma API (que funciona como um Producer tambem), e um Worker (Consumer). O guia a seguir fornece instru√ß√µes detalhadas para configurar e implantar o projeto em um ambiente Azure.
 
 ## Requisitos
-Antes de comeÁar, certifique-se de ter o seguinte:
-- Conta no Azure com as permissıes necess·rias.
-- Conta no Azure DevOps com acesso ao projeto desejado.
+Antes de come√ßar, certifique-se de ter o seguinte:
+- Conta no Azure com as permiss√µes necess√°rias.
 - .NET 8 SDK instalado localmente.
 - Git instalado localmente.
 
-## Passos para ConfiguraÁ„o e ImplantaÁ„o
+## Passos para Configura√ß√£o e Implanta√ß√£o
 
 ### 1. Deploy dos recursos no Azure.
 - Sql Server + Database (Aplicar Migrations, ex: dotnet ef database update).
@@ -19,9 +18,9 @@ Antes de comeÁar, certifique-se de ter o seguinte:
 - Azure App Service.
 - Service Bus + Queue
 
-### 2. Clone o RepositÛrio
+### 2. Clone o Reposit√≥rio
 
-- Abra um terminal e execute o seguinte comando para clonar o repositÛrio do GitHub:
+- Abra um terminal e execute o seguinte comando para clonar o reposit√≥rio do GitHub:
 
 	```
   git clone https://github.com/guigsgbm/TechChallenge04.git
@@ -70,6 +69,6 @@ Depois, iremos navegar ate a aba "Docker" e apontaremos para as imagens que fora
 
 O processo eh semelhante para o ACI, basta criar o recurso apontando para a imagem, ou fazer o deploy da imagem no recurso posteriormente.
 
-### Conclus„o
+### Conclus√£o
 
-- Ao final, o aplicativo ser· implantado, assim como todo o resto do fluxo ter· sido executado e as aplicacoes estaram disponiveis nos endpoints dos App Services.
+- Ao final, o aplicativo ser√° implantado, assim como todo o resto do fluxo ter√° sido executado e as aplicacoes estaram disponiveis nos endpoints dos App Services.
